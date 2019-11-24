@@ -94,31 +94,98 @@ const ModelScreen = props => {
   function showResults() {
 
     let numberOfInstancesFromAge18To98 = 235;
-    let numberOfInstancesFromAge60To98 = 373;
+    let result = "";
+
+    // FromAge18To98(ses, mmse, etiv, nwbv, asf, props.navigation.state.params)
+    // FromAge18To98(3, 6, 1106, 0.77, 1.4, props.navigation.state.params)
+    let returnedValueFromAge18To98Tree =
+      FromAge18To98(3, 6, 1106, 0.77, 1.4, props.navigation.state.params)
+    console.log(returnedValueFromAge18To98Tree)
+    result += (
+      "Cross-sectional MRI Data in Young, Middle Aged, Nondemented and Demented Older Adults:" +
+      "\n" +
+      "\n" +
+      "\t" + "Result = " + returnedValueFromAge18To98Tree.substring(0, 1)
+    );
+
+    returnedValueGrowingSet =
+      returnedValueFromAge18To98Tree
+        .slice(
+          returnedValueFromAge18To98Tree.indexOf("(") + 1, returnedValueFromAge18To98Tree.indexOf(")")
+        )
+    returnedValueGrowingSetParts = returnedValueGrowingSet.split("/");
+    result += (
+      "\n" +
+      "\t" + "Growing set:" +
+      "\n" +
+      "\t" + "\t" + "Coverage = " + (returnedValueGrowingSetParts[0] / numberOfInstancesFromAge18To98) +
+      "\n" +
+      "\t" + "\t" + "Accuracy = " + ((returnedValueGrowingSetParts[0] - returnedValueGrowingSetParts[1]) / returnedValueGrowingSetParts[0])
+    );
+
+    returnedValuePruningSet =
+      returnedValueFromAge18To98Tree
+        .slice(
+          returnedValueFromAge18To98Tree.indexOf("[") + 1, -1
+        )
+    returnedValuePruningSetParts = returnedValuePruningSet.split("/");
+    result += (
+      "\n" +
+      "\t" + "Pruning set:" +
+      "\n" +
+      "\t" + "\t" + "Coverage = " +
+      (returnedValuePruningSetParts[0] / numberOfInstancesFromAge18To98) +
+      "\n" +
+      "\t" + "\t" + "Accuracy = " +
+      ((returnedValuePruningSetParts[0] != 0) ?
+        ((returnedValuePruningSetParts[0] - returnedValuePruningSetParts[1]) / returnedValuePruningSetParts[0]) :
+        "not available")
+
+    );
 
     if (groupAndMrdelayAreVisible) {
 
-      let firstPartFromAge18To98 = FromAge18To98(2, 24, 2003, 0.65, 0.89, props.navigation.state.params)
+      let numberOfInstancesFromAge60To98 = 373;
+      let returnedValueParts;
 
-      let firstPartFromAge60To98 =
-        FromAge60To98("demented", 100, 4, 30, props.navigation.state.params)
-          .slice(2, -1)
-          .split("/");
-      let coverageFromAge60To98 = firstPartFromAge60To98[0] / numberOfInstancesFromAge60To98;
-      let accuracyFromAge60To98 = (firstPartFromAge60To98[0] - firstPartFromAge60To98[1]) / firstPartFromAge60To98[0];
-      setShowResultsDialogText(
-        "Coverage: " + coverageFromAge60To98 +
+      // FromAge60To98("demented", 100, 4, 21, props.navigation.state.params)
+      // FromAge60To98(group, mrdelay, ses, mmse, props.navigation.state.params)
+      let returnedValueFromAge60To98Tree =
+        FromAge60To98(group, mrdelay, ses, mmse, props.navigation.state.params);
+
+      result += (
         "\n" +
-        "Accuracy: " + accuracyFromAge60To98
-      )
+        "\n" +
+        "\n" +
+        "Longitudinal MRI Data in Nondemented and Demented Older Adults:" +
+        "\n" +
+        "\n" +
+        "\t" + "Result = " + returnedValueFromAge60To98Tree.substring(0, 1)
+      );
 
-      setShowResultsDialogIsVisible(true);
+      if (returnedValueFromAge60To98Tree.includes("/")) {
+        returnedValueParts = returnedValueFromAge60To98Tree.slice(2, -1).split("/");
 
-      // FromAge18To98(ses, mmse, etiv, nwbv, asf, props.navigation.state.params)
+        result += (
+          "\n" +
+          "\t" + "Coverage = " + (returnedValueParts[0] / numberOfInstancesFromAge60To98) +
+          "\n" +
+          "\t" + "Accuracy = " + ((returnedValueParts[0] - returnedValueParts[1]) / returnedValueParts[0])
+        );
+      } else {
+        let returnedValue = returnedValueFromAge60To98Tree.slice(2, -1);
 
-    } else {
-      //console.log(FromAge18To98(ses, mmse, etiv, nwbv, asf));
+        result += (
+          "\n" +
+          "\t" + "Coverage: " + (returnedValue / numberOfInstancesFromAge60To98) +
+          "\n" +
+          "\t" + "Accuracy: " + "not available"
+        );
+      }
     }
+
+    setShowResultsDialogText(result);
+    setShowResultsDialogIsVisible(true);
   }
 
   return (
@@ -139,12 +206,6 @@ const ModelScreen = props => {
         showsVerticalScrollIndicator={false}>
         <View
           style={styles.content}>
-          <Button
-            style={styles.button}
-            mode="contained"
-            onPress={() => showResults()}>
-            Show results
-          </Button>
           <Group
             groupValue={value => { setGroup(value) }}
             visible={groupAndMrdelayAreVisible} />
@@ -187,7 +248,11 @@ const ModelScreen = props => {
                 </Paragraph>
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={() => { setShowResultsDialogIsVisible(false) }}>Done</Button>
+                <Button onPress={() => {
+                  setShowResultsDialogIsVisible(false);
+                  setShowResultsDialogText("");
+                  showResultsDialogText
+                }}>Done</Button>
               </Dialog.Actions>
             </Dialog>
           </Portal>
