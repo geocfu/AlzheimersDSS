@@ -46,7 +46,7 @@ const ModelScreen = props => {
   useEffect(() => {
 
     if (groupAndMrdelayAreVisible) {
-      if (group && mrdelay && ses && mmse) {
+      if (group && mrdelay && ses && mmse && etiv && nwbv && asf) {
         setShowResultsButtonIsDisabled(false);
       } else {
         setShowResultsButtonIsDisabled(true);
