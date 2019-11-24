@@ -25,7 +25,6 @@ const HomeScreen = props => {
     } else {
       setContinueButtonIsDisabled(true);
     }
-    props.navigation.navigate("About");
   });
 
   const { colors } = props.theme;

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StatusBar,
   View,
+  WebView,
 } from 'react-native';
 import {
   Button,
@@ -14,7 +15,10 @@ import {
   Text,
   List,
   withTheme,
+  TouchableRipple,
 } from 'react-native-paper';
+
+import { Linking } from 'expo';
 
 const AboutScreen = props => {
 
@@ -33,21 +37,58 @@ const AboutScreen = props => {
     },
   });
 
+  function openInAppBrowser() {
+    console.log("hello")
+  }
+
   return (
     <SafeAreaView
       style={styles.container}>
       <StatusBar
         backgroundColor="#6979D1"
-        barStyle="light-content"/>
+        barStyle="light-content" />
       <Appbar.Header>
         <Appbar.Content
-          title="Alzheimer's DSS"/>
+          title="Alzheimer's DSS" />
       </Appbar.Header>
       <ScrollView
         showsVerticalScrollIndicator={false}>
         <View
           style={styles.content}>
-
+          <List.Item
+            title="Version"
+            description="1.0.0"
+            left={props => <List.Icon {...props} icon="history" />}
+          />
+          <List.Item
+            title="Report an issue"
+            description="Having an issue? Report it here"
+            left={props => <List.Icon {...props} icon="bug" />}
+            onPress={() => {Linking.openURL("https://github.com/geocfu/AlzheimersDSS/issues/")}}
+          />
+          <List.Subheader>About</List.Subheader>
+          <List.Item
+            title="Source code"
+            description="The source code of the app"
+            left={props => <List.Icon {...props} icon="github-circle" />}
+            onPress={() => {Linking.openURL("https://github.com/geocfu/AlzheimersDSS/")}}
+          />
+          <List.Subheader>The Team</List.Subheader>
+          <List.Item
+            title="Themis Exarchos"
+            description="Supervisor"
+            left={props => <List.Icon {...props} icon="account-supervisor" />}
+          />
+          <List.Item
+            title="George Mantellos"
+            description="Developer"
+            left={props => <List.Icon {...props} icon="account" />}
+          />
+          <List.Item
+            title="John Lavdos"
+            description="Data Analyst"
+            left={props => <List.Icon {...props} icon="account" />}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
