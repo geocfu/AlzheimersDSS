@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import {
   Button,
-  Appbar
+  Appbar,
+  withTheme
 } from 'react-native-paper';
-import { withTheme } from 'react-native-paper';
 
 import Age from "../components/Model/Attributes/Age";
 

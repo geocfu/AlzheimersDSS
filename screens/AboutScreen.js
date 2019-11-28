@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
   StatusBar,
   View,
-  WebView,
 } from 'react-native';
 import {
-  Button,
   Appbar,
-  TextInput,
-  Title,
-  Text,
   List,
   withTheme,
-  TouchableRipple,
 } from 'react-native-paper';
 
 import { Linking } from 'expo';
