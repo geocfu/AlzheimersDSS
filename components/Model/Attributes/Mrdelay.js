@@ -8,10 +8,6 @@ import {
 } from "react-native-paper";
 
 const Mrdelay = props => {
-  //prevent the mrdelay from showing if the user's age is below 60
-  if (!props.visible) {
-    return null;
-  }
 
   const [mrdelay, setMrdelay] = useState("");
 

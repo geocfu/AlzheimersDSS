@@ -12,19 +12,8 @@ const Age = props => {
   const [age, setAge] = useState("");
 
   function validateAge(text) {
-    //range must be from 18 to 98
-    if (parseInt(text.charAt(0)) === 1) {
-      //first digit is 1
-      if (parseInt(text.length) === 1) {
-        setAge(text);
-        props.ageValue(text);
-      } else if (parseInt(text.length) === 2 &&
-        (parseInt(text.charAt(1)) === 8 || parseInt(text.charAt(1)) === 9)) {
-        setAge(text);
-        props.ageValue(text);
-      }
-    } else if (parseInt(text.charAt(0)) >= 2 && parseInt(text.charAt(0)) <= 8) {
-      //first digit is 2
+    //range must be from 60 to 96
+    if (parseInt(text.charAt(0)) >= 6 && parseInt(text.charAt(0)) <= 8) {
       if (parseInt(text.length) === 1) {
         setAge(text);
         props.ageValue(text);
@@ -38,7 +27,7 @@ const Age = props => {
         setAge(text);
         props.ageValue(text);
       } else if (parseInt(text.length) === 2 &&
-        (parseInt(text.charAt(1)) >= 0 && parseInt(text.charAt(1)) <= 8)) {
+        (parseInt(text.charAt(1)) >= 0 && parseInt(text.charAt(1)) <= 6)) {
         setAge(text);
         props.ageValue(text);
       }
@@ -69,7 +58,7 @@ const Age = props => {
           }
         }} />
       <Text>
-        Age must be between 18 and 98.
+        Age must be between 60 and 96.
       </Text>
     </View>
   );

@@ -7,9 +7,9 @@ import {
   withTheme
 } from "react-native-paper";
 
-const Group = props => {
-  
-  const [group, setGroup] = useState("");
+const Sex = props => {
+
+  const [sex, setSex] = useState("");
 
   const styles = StyleSheet.create({
     activity: {
@@ -18,42 +18,36 @@ const Group = props => {
       alignSelf: 'center',
     },
   });
-  
+
   return (
     <View>
       <Title>
-        Please input your Group.
+        Please input your Sex.
       </Title>
       <RadioButton.Group
         onValueChange={
           value => {
-            setGroup(value);
+            setSex(value);
             //return to the parent component the value from the radio buttons
-            props.groupValue(value);
+            props.sexValue(value);
           }
         }
-        value={group}>
+        value={sex}>
         <View
           style={styles.activity}>
           <RadioButton
-            value="demented" />
-          <Paragraph>Demented</Paragraph>
+            value="M" />
+          <Paragraph>Male</Paragraph>
         </View>
         <View
           style={styles.activity}>
           <RadioButton
-            value="nondemented" />
-          <Paragraph>Nondemented</Paragraph>
-        </View>
-        <View
-          style={styles.activity}>
-          <RadioButton
-            value="converted" />
-          <Paragraph>Converted</Paragraph>
+            value="F" />
+          <Paragraph>Female</Paragraph>
         </View>
       </RadioButton.Group>
     </View>
   );
 }
 
-export default withTheme(Group);
+export default withTheme(Sex);
