@@ -29,8 +29,8 @@ const Mrdelay = props => {
   return (
     <View>
       <Title>
-        Please input your MR delay.
-          </Title>
+        Please input your MR Delay (Time).
+      </Title>
       <TextInput
         mode="outlined"
         label="MR delay"

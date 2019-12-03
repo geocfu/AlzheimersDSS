@@ -47,7 +47,7 @@ const Mmse = props => {
   return (
     <View>
       <Title>
-        Please input your MMSE.
+        Please input your MMSE (Mini Mental State Examination).
       </Title>
       <TextInput
         mode="outlined"

@@ -54,7 +54,7 @@ const Nwbv = props => {
   return (
     <View>
       <Title>
-        Please input your nWBV.
+        Please input your nWBV (Normalize Whole Brain Volume).
       </Title>
       <TextInput
         mode="outlined"

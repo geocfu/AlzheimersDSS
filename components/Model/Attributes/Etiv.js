@@ -66,7 +66,7 @@ const Etiv = props => {
   return (
     <View>
       <Title>
-        Please input your eTIV.
+        Please input your eTIV (Estimated Total Intracranial Volume).
       </Title>
       <TextInput
         mode="outlined"
