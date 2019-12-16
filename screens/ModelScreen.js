@@ -116,7 +116,7 @@ const ModelScreen = props => {
         "\n" +
         "\t" + "Coverage: " + (returnedValue / numberOfInstancesFromAge60To96) +
         "\n" +
-        "\t" + "Accuracy: " + "not available"
+        "\t" + "Accuracy: " + "1.00"
       );
     }
 
