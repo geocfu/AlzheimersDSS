@@ -28,6 +28,14 @@ const Etiv = props => {
         props.etivValue(text);
       } else if (parseInt(text.length) === 4 &&
         (parseInt(text.charAt(2)) === 0) &&
+        (parseInt(text.charAt(1)) > 1) &&
+        ((parseInt(text.charAt(3)) >= 0 && parseInt(text.charAt(3)) <= 9))) {
+        console.log("1)parseInt(text.length) === 4");
+        setEtiv(text);
+        props.etivValue(text);
+      } else if (parseInt(text.length) === 4 &&
+        (parseInt(text.charAt(2)) === 0) &&
+        (parseInt(text.charAt(1)) === 1) &&
         ((parseInt(text.charAt(3)) >= 6 && parseInt(text.charAt(3)) <= 9))) {
         setEtiv(text);
         props.etivValue(text);
