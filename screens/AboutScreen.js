@@ -51,7 +51,7 @@ const AboutScreen = props => {
           style={styles.content}>
           <List.Item
             title="Version"
-            description="2.0.0"
+            description="2.0.1"
             left={props => <List.Icon {...props} icon="history" />}
           />
           <List.Item
